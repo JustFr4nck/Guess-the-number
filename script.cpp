@@ -1,61 +1,71 @@
 #include <iostream>
 #include <cctype> // for isalpha
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 bool onlyAlpha(string name);
+bool onlyOneOfThis(int diff);
 
-
-//main
+// main
 int main()
 {
 
+    srand(time(0));
+
     string name;
-    int n;
+    int n, diff, valMax;
 
     while (true)
     {
-
-        cout << "Inserisci il tuo nome" << endl;
-        cin >> name;
-
-        if(onlyAlpha(name)){
-            break;
-        }
-    }
-
-    cout << "Bene " << name << ",\nDigita 1 per la difficoltà facile;\nDigita 2 per la difficoltà media;\nDigita 3 per la difficoltà difficile;\nDigita 0 per chiudere il programma" << endl;
-    cin >> n;
-
-    while (true){
-
-        switch (n)
+        while (true)
         {
-        case 1:
-            
-            break;
-        
-        case 2:
-            
-            break;
-        
-        case 3:
 
-            break;
+            cout << "Inserisci il tuo nome" << endl;
+            cin >> name;
 
-        case 0:
-            break;
-        
-        default:
-            cout << "ERRORE: Inserire uno dei caratteri richiesti" << endl;
+            if (onlyAlpha(name))
+            {
+                break;
+            }
         }
+
+        while (true)
+        {
+
+            cout << "Bene " << name << ",\nDigita 1 per la difficoltà facile;\nDigita 2 per la difficoltà media;\nDigita 3 per la difficoltà difficile" << endl;
+            cin >> diff;
+
+            if (onlyOneOfThis(diff))
+            {
+                break;
+            }
+
+            cout << "ERRORE: Inserire una delle difficoltà richieste" << endl;
+        }
+
+        if (diff == 1)
+        {
+            valMax = 10;
+            cout << "Indovina i numeri da 0 a 10" << endl;
+        }
+        else if (diff == 2)
+        {
+            valMax = 100;
+            cout << "Indovina i numeri da 0 a 100" << endl;
+        }
+        else
+        {
+            valMax = 1000;
+            cout << "Indovina i numeri da 0 a 1000" << endl;
+        }
+
+        int hideNum = rand() % valMax + 1;
     }
-    return 0;
 }
 
-
-
-//Metods
+// Metods
 
 bool onlyAlpha(string name)
 {
@@ -70,4 +80,16 @@ bool onlyAlpha(string name)
     }
 
     return true;
+}
+
+bool onlyOneOfThis(int diff)
+{
+
+    if (diff == 1 || diff == 2 || diff == 3)
+    {
+
+        return true;
+    }
+
+    return false;
 }
