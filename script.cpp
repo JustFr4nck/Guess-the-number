@@ -15,7 +15,8 @@ int main()
     srand(time(0));
 
     string name;
-    int n, diff, valMax;
+    int n, diff, valMax, val, count = 0;
+    char fin;
 
     while (true)
     {
@@ -35,7 +36,12 @@ int main()
         {
 
             cout << "Bene " << name << ",\nDigita 1 per la difficoltà facile;\nDigita 2 per la difficoltà media;\nDigita 3 per la difficoltà difficile" << endl;
-            cin >> diff;
+            while (!(cin >> diff))
+            {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "ERRORE: devi inserire un numero" << endl;
+            }
 
             if (onlyOneOfThis(diff))
             {
@@ -43,6 +49,7 @@ int main()
             }
 
             cout << "ERRORE: Inserire una delle difficoltà richieste" << endl;
+            continue;
         }
 
         if (diff == 1)
@@ -62,7 +69,43 @@ int main()
         }
 
         int hideNum = rand() % valMax + 1;
+
+        cout << "Inserisci valore: ";
+        cin >> val;
+
+        while (true)
+        {
+
+            count++;
+
+            if (val > hideNum)
+            {
+                cout << "Numero troppo grande" << endl;
+            }
+            else if (val < hideNum)
+            {
+                cout << "Numero troppo piccolo" << endl;
+            }
+            else
+            {
+                cout << "HAI VINTO!!!!" << "\nNumero di tentativi: " << count << endl;
+                break;
+            }
+
+            cout << "Inserisci valore: ";
+            cin >> val;
+        }
+
+        cout << "Digita 'a' per terminare il gioco, altrimenti qualsiasi tasto per continuare a giocare" << endl;
+        cin >> fin;
+
+        if (fin == 'a')
+        {
+            break;
+        }
     }
+
+    return 0;
 }
 
 // Metods
